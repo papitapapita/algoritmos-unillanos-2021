@@ -1,0 +1,130 @@
+#include <stdio.h>
+#include <conio.h>
+
+int primo(int num){
+	int i, flag = 0;
+	for (i = 2; i <= num / 2; ++i) {
+	// condition for non-prime
+		if (num % i == 0) {
+		    flag = 1;
+		    break;
+		}
+	}
+	
+	if (num == 1) {
+		printf("1 is neither prime nor composite.");
+	} 
+	else {
+		if (flag == 0){
+			printf("%d es un numero primo.", num);	
+		}
+	}
+	
+	  return 0;
+}
+
+int main(){
+	char nv;
+	int cant_num,option,num,sum_num,even,su,salir,prom;
+	do{		
+		//cant_num = cantidad de números
+		//option = opción del menú
+		//i = iteraciones del ciclo
+		//num = números pares que ingresa
+		//sum_num = suma de los números pares
+		//prom = promedio
+		//even = si es par o no
+		//su = sucesión
+		//salir = variable para salir del programa
+		//nv = nuevos valores
+		
+		do{
+			clrscr();
+			gotoxy(5,2);
+			printf("Escriba un numero positivo mayor que 6: ");
+			gotoxy(5,3);
+			scanf("%d", &cant_num);	
+		}while(cant_num<7);
+		
+		do{
+			gotoxy(15,7);
+			printf("MENU PRINCIPAL");
+			gotoxy(5,9);
+			printf("1. Promedio");
+			gotoxy(5,11);
+			printf("2. Serie");
+			gotoxy(5,13);
+			printf("3. Salir");
+			gotoxy(5,15);
+			scanf("%d", &option);
+			clrscr();
+			switch(option){
+				case 1:
+					sum_num = 0;
+					gotoxy(5,1);
+					if(cant_num%2==0)
+					{
+						int z = 0;
+						printf("Ingrese %d numeros pares: ", cant_num);
+						for(int i = 0; i<cant_num; i++)
+						{
+							gotoxy(5, i+2);
+							do{
+								if(z==1)
+								{
+									gotoxy(5, i+2);
+								}
+								scanf("%d",&num);
+								z = 1;	
+							}while(num%2 != 0 || num<4);
+							gotoxy(10, i+2);
+							primo(num);
+							sum_num += num; 
+						}
+					}
+					else
+					{
+						int z = 0;
+						printf("Ingrese %d numeros impares: ", cant_num);
+						for(int i = 0; i<cant_num; i++)
+						{
+							gotoxy(5, i+2);
+							do{
+								if(z==1)
+								{
+									gotoxy(5, i+2);
+								}
+								scanf("%d",&num);	
+								z = 1;
+							}while(num%2 == 0 || num<4);
+							gotoxy(10, i+2);
+							primo(num);
+							sum_num += num; 
+						}
+					}
+					prom = sum_num/cant_num;
+					gotoxy(5, 20);
+					printf("El promedio redondeado es: %d", prom);
+					getch();
+					clrscr();
+					break;
+				case 2:
+					for(int i = 1; i<=cant_num; i++)
+					{	
+						gotoxy(2, i+2);
+						printf("1/%d",i);
+					}
+					break;
+				case 3:
+					salir = 1;
+					break;
+				default:
+					printf("Ingresaste un valor erroneo");
+					break;	
+			}			
+		}while(salir!=1);	
+		clrscr();
+		printf("Desea ingresar nuevos valores? (y/n): ");
+		scanf("%s", &nv);
+	}while(nv=='y' || nv=='Y');			
+}
